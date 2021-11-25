@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Demo Intent</string>
+    <string name="no_value">No value</string>
+    <string name="no_app">No app could handle this action</string>
+</resources>
