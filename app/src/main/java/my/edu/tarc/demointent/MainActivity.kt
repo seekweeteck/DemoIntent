@@ -53,15 +53,18 @@ class MainActivity : AppCompatActivity() {
 
         binding.buttonWeb.setOnClickListener {
             val intent = Intent(Intent.ACTION_VIEW)
-            intent.setData(Uri.parse("https://www.tarc.edu.my"))
-            if(intent.resolveActivity(packageManager)!= null){
+            intent.data = Uri.parse("https://www.tarc.edu.my")
+            startActivity(intent)
+            /*if(intent.resolveActivity(packageManager)!= null){
                 startActivity(intent)
             }else{
                 Snackbar.make(binding.root, R.string.no_app, Snackbar.LENGTH_SHORT).show()
-            }
+            }*/
         }
 
         binding.buttonSendText.setOnClickListener {
+            //Send a message using an Implicit Intent
+            //The ShareActivity has an intent-filter to handle plain text - refer to the manifest file
             val intent = Intent(Intent.ACTION_SEND)
             intent.setType("text/plain")
             intent.putExtra(Intent.EXTRA_TEXT, "My message")
