@@ -12,6 +12,6 @@ class ShareActivity : AppCompatActivity() {
 
         val message = intent.getStringExtra(Intent.EXTRA_TEXT)
         val textViewMessage = findViewById<TextView>(R.id.textViewSendMessage)
-        textViewMessage.text = message
+        textViewMessage.text = message.toString()
     }
 }

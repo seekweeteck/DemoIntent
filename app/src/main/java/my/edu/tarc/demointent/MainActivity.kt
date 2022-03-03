@@ -4,6 +4,8 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.PersistableBundle
+import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import com.google.android.material.snackbar.Snackbar
 import my.edu.tarc.demointent.databinding.ActivityMainBinding
@@ -54,12 +56,12 @@ class MainActivity : AppCompatActivity() {
         binding.buttonWeb.setOnClickListener {
             val intent = Intent(Intent.ACTION_VIEW)
             intent.data = Uri.parse("https://www.tarc.edu.my")
-            startActivity(intent)
-            /*if(intent.resolveActivity(packageManager)!= null){
+            //Package manager stores information related to the application packages that are currently installed on the device
+            if(intent.resolveActivity(packageManager)!= null){
                 startActivity(intent)
             }else{
                 Snackbar.make(binding.root, R.string.no_app, Snackbar.LENGTH_SHORT).show()
-            }*/
+            }
         }
 
         binding.buttonSendText.setOnClickListener {
@@ -67,9 +69,22 @@ class MainActivity : AppCompatActivity() {
             //The ShareActivity has an intent-filter to handle plain text - refer to the manifest file
             val intent = Intent(Intent.ACTION_SEND)
             intent.setType("text/plain")
-            intent.putExtra(Intent.EXTRA_TEXT, "My message")
+            val message = binding.editTextSendMessage.text.toString()
+            intent.putExtra(Intent.EXTRA_TEXT, message)
             startActivity(intent)
         }
+
+        //Saving instance state
+
+        val message: String? = savedInstanceState?.getString("message")
+        if(!message.isNullOrEmpty()){
+            binding.textViewResult.text = message.toString()
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
+        super.onSaveInstanceState(outState, outPersistentState)
+        outState.putString("message", binding.textViewResult.text.toString())
     }
 
     companion object{
