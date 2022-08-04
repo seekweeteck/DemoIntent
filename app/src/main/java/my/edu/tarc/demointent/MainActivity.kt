@@ -80,11 +80,23 @@ class MainActivity : AppCompatActivity() {
         if(!message.isNullOrEmpty()){
             binding.textViewResult.text = message.toString()
         }
+
+        Log.d("Main", "onCreate")
     }
 
     override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
         super.onSaveInstanceState(outState, outPersistentState)
         outState.putString("message", binding.textViewResult.text.toString())
+    }
+
+    override fun onPause() {
+        Log.d("Main", "onPause")
+        super.onPause()
+    }
+
+    override fun onStop() {
+        Log.d("Main", "onStop")
+        super.onStop()
     }
 
     companion object{

@@ -2,6 +2,7 @@ package my.edu.tarc.demointent
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import my.edu.tarc.demointent.databinding.ActivityMainBinding
 import my.edu.tarc.demointent.databinding.ActivitySecondBinding
 
@@ -15,5 +16,12 @@ class SecondActivity : AppCompatActivity() {
         binding.buttonClose.setOnClickListener {
             finish()
         }
+
+        Log.d("Second", "onCreate")
+    }
+
+    override fun onStop() {
+        Log.d("Second", "onStop")
+        super.onStop()
     }
 }
